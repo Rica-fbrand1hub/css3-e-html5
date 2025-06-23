@@ -36,6 +36,79 @@ Contamos com uma **fábrica matriz equipada** com processos limpos, tecnologia d
 🗓️ Atendimento: Segunda a Sexta, das 8h às 18h🌱 Quer transformar sua rua, bairro ou cidade com inovação e respeito ao meio ambiente?
 
 Solicite uma apresentação técnica ou agende uma visita com nossa equipe especializada.  
-Juntos, vamos **redefinir o caminho das cidades para um futuro mais verde, acessível e inteligente.**
+Juntos, vamos **redefinir o caminho das cidades para um futuro mais verde, acessível e inteligente.**<!DOCTYPE html><html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Assistente VSM Visionária</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Atendimento Virtual VSM</h1>
+    <p>Sua assistente inteligente com voz e IA</p>
+  </header>  <main>
+    <section>
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <img id="avatar" src="avatar.png" alt="Avatar Feminina" width="140" style="border-radius: 10px;">
+        <div>
+          <p id="mensagem-ia">Olá! Como posso ajudar você hoje?</p>
+          <button onclick="ativarMicrofone()">🎙️ Fale comigo</button>
+        </div>
+      </div>
+      <br>
+      <label for="entrada">Ou digite sua pergunta:</label>
+      <input type="text" id="entrada" placeholder="Ex: Como funciona nosso sistema?" onkeydown="if(event.key==='Enter'){enviarPergunta()}">
+      <button onclick="enviarPergunta()">Enviar</button>
+    </section>
+  </main>  <script>
+    const reconhecimento = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    reconhecimento.lang = 'pt-BR';
+    reconhecimento.onresult = function(event) {
+      const texto = event.results[0][0].transcript;
+      document.getElementById("entrada").value = texto;
+      enviarPergunta();
+    };
+
+    function ativarMicrofone() {
+      reconhecimento.start();
+    }
+
+    function falar(texto) {
+      const sintese = window.speechSynthesis;
+      const fala = new SpeechSynthesisUtterance(texto);
+      fala.lang = 'pt-BR';
+      fala.pitch = 1;
+      fala.rate = 1;
+      fala.voice = sintese.getVoices().find(v => v.lang === 'pt-BR' && v.name.includes("Luciana")) || null;
+      sintese.speak(fala);
+    }
+
+    async function enviarPergunta() {
+      const pergunta = document.getElementById("entrada").value;
+      if (!pergunta) return;
+
+      document.getElementById("mensagem-ia").textContent = "Pensando...";
+
+      const resposta = await fetch("https://api.openai.com/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Authorization": "Bearer SUA_CHAVE_OPENAI"
+        },
+        body: JSON.stringify({
+          model: "gpt-3.5-turbo",
+          messages: [{ role: "user", content: pergunta }]
+        })
+      });
+
+      const dados = await resposta.json();
+      const texto = dados.choices[0].message.content;
+
+      document.getElementById("mensagem-ia").textContent = texto;
+      falar(texto);
+    }
+  </script></body>
+</html>
 
 um projeto com dados fictício 
