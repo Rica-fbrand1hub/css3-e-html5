@@ -1,4 +1,4 @@
-# css3-e-html5
+# css3-e-html5 projeto fictício para desenvolvimento real
 🌿 VSM Visionária – Soluções Sustentáveis para Cidades InteligentesSomos uma empresa especializada em soluções de urbanismo ecológico e acessível. Desenvolvemos, fabricamos e implantamos **calçadas inteligentes, drenantes e sustentáveis**, substituindo o concreto por **materiais recicláveis, biotecnológicos e esteticamente inovadores**.
 
 Nosso compromisso é transformar a paisagem urbana em um espaço mais bonito, acessível, seguro e preparado para o futuro climático.
